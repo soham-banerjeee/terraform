@@ -1,3 +1,5 @@
 sum by (namespace, deployment) (
     kube_deployment_status_replicas - kube_deployment_spec_replicas
 )
+
+sum by (namespace, deployment) (kube_deployment_status_replicas{deployment="coredns"} - kube_deployment_spec_replicas {deployment="coredns"})
