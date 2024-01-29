@@ -5,3 +5,8 @@ sum by (namespace, deployment) (
 sum by (namespace, deployment) (kube_deployment_status_replicas{deployment="coredns"} - kube_deployment_spec_replicas {deployment="coredns"})
 
 sum(cluster_autoscaler_scaled_up_nodes_total)
+
+sum(cluster_autoscaler_unneeded_nodes_count)
+
+sum(cluster_autoscaler_nodes_count)
+
