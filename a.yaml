@@ -10,4 +10,4 @@ sum(cluster_autoscaler_unneeded_nodes_count)
 
 sum(cluster_autoscaler_nodes_count)
 
-rate(scale_up_failures_total[5m])
+count(kube_hpa_status_desired_replicas)
