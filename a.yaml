@@ -10,5 +10,4 @@ sum(cluster_autoscaler_unneeded_nodes_count)
 
 sum(cluster_autoscaler_nodes_count)
 
-count(kube_replicaset_created) - count(kube_replicaset_status_ready_replicas)
-
+rate(scale_up_failures_total[5m])
