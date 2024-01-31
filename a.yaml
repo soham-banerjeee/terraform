@@ -11,3 +11,6 @@ sum(cluster_autoscaler_unneeded_nodes_count)
 sum(cluster_autoscaler_nodes_count)
 
 count(kube_hpa_status_desired_replicas)
+count(kube_node_status_condition{condition="Ready", status="True"})
+count(kube_node_status_condition{condition="Ready", status="False"})
+
