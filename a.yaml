@@ -14,3 +14,5 @@ count(kube_hpa_status_desired_replicas)
 count(kube_node_status_condition{condition="Ready", status="True"})
 count(kube_node_status_condition{condition="Ready", status="False"})
 
+sum(delta(kube_pod_container_status_restarts{namespace="kube-system"}[30m]))
+
