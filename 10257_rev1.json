@@ -34,6 +34,24 @@ sum(kubelet_running_containers)
     * on (cluster, namespace, pod) group_left (workload, workload_type)
     sum by (cluster, namespace, pod, workload, workload_type) (
       namespace_workload_pod:kube_pod_owner:relabel{pod=~"()"}
+
+
+
+
+      count by (severity) (
+        ALERTS{alertstate=~"", alertname=~"(Kube.*|CPUThrottlingHigh)", cluster=~"", severity=~"()", namespace="", alertname=~"Kube.*"}
+        OR
+        ALERTS{alertstate=~"", alertname=~"(Kube.*|CPUThrottlingHigh)", cluster=~"", severity=~"()", namespace=~""}
+      )
+
+
+
+
+      count by (severity) (
+        ALERTS{alertstate=~"", alertname=~"", cluster=~"", severity=~"()", namespace="", alertname=~""}
+        OR
+        ALERTS{alertstate=~"", alertname=~"", cluster=~"", severity=~"()", namespace=~""}
+      )
     )
 
 
