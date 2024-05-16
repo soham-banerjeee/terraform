@@ -1,1 +1,40 @@
 1 - (kubelet_volume_stats_available_bytes{cluster!="", instance!="", persistentvolumeclaim!=""} / kubelet_volume_stats_capacity_bytes{cluster!="", instance!="", persistentvolumeclaim!=""}) > 0.9
+
+
+count(count by (cluster) (kube_node_info{cluster!=""}))
+
+count(kube_node_info{cluster!=""})
+
+sum(kubelet_running_pods)
+
+sum(kubelet_running_containers)
+
+
+(topk by (cluster, instance, device) (1, node_filesystem_size_bytes{cluster!="", device!="", instance!=""})
+    - topk by (cluster, instance, device) (1, node_filesystem_avail_bytes{cluster!="", device!="", instance!=""})) /
+    topk by (cluster, instance, device) (1, node_filesystem_size_bytes{cluster!="", device!="", instance!=""}) > 0.9
+
+
+1 - label_replace(
+      max by (cluster, instance) (windows_memory_available_bytes{cluster!=""} OR node_memory_MemAvailable_bytes{cluster!=""}),
+      "node","$1","instance","([^:]*).*")
+      / on (cluster, node) group_left
+      max by (cluster, node) (kube_node_status_capacity{cluster!="", resource="memory"}) > 0.9
+
+
+(topk by (cluster, instance, device) (1, node_filesystem_size_bytes{cluster!="", device!="", instance!=""})
+    - topk by (cluster, instance, device) (1, node_filesystem_avail_bytes{cluster!="", device!="", instance!=""})) /
+    topk by (cluster, instance, device) (1, node_filesystem_size_bytes{cluster!="", device!="", instance!=""}) > 0.9
+
+
+
+    sum by (alertname, severity, cluster, namespace, pod) (
+      ALERTS{alertstate="firing", alertname=~"(Kube.*|CPUThrottlingHigh)", namespace!="", pod=~"()"}
+    )
+    * on (cluster, namespace, pod) group_left (workload, workload_type)
+    sum by (cluster, namespace, pod, workload, workload_type) (
+      namespace_workload_pod:kube_pod_owner:relabel{pod=~"()"}
+    )
+
+
+
