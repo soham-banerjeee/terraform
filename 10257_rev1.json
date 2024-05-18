@@ -83,7 +83,7 @@ sum by (cluster, namespace, pod, workload, workload_type) (
 
 
 
-table sum by (alertname, severity, cluster, namespace, pod, workload, workload_type) (
+sum by (alertname, severity, cluster, namespace, pod, workload, workload_type) (
   ALERTS{alertstate="firing", namespace!="", pod=~".+"}
 ) * on (cluster, namespace, pod) group_left (workload, workload_type)
 sum by (cluster, namespace, pod, workload, workload_type) (
@@ -105,4 +105,3 @@ sum by (cluster, namespace, pod, workload, workload_type) (
       kube_pod_owner{cluster=~".+", namespace=~".+", pod=~".+", owner_kind="Node"}
     , "workload", "$1", "pod", "(.+)"), "workload_type", "staticpod", "", "")
 )
-
