@@ -7,3 +7,5 @@ rate(container_cpu_cfs_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m])
  Ratio of throttled CPU periods to total CPU periods over a 5m time 
 
 Throttled CPU Periods over a 5m time 
+
+Total CPU Periods over a 5m time 
