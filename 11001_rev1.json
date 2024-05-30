@@ -18,3 +18,5 @@ count_over_time(
 
 
 label_replace(kube_node_labels, "label_agentpool", "$1", "label_", "(.*)")
+
+count(kube_node_info and on(node) kube_node_labels)
