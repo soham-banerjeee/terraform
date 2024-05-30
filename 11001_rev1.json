@@ -9,3 +9,9 @@ rate(container_cpu_cfs_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m])
 Throttled CPU Periods over a 5m time 
 
 Total CPU Periods over a 5m time 
+
+count_over_time(
+  sum by (label_agentpool) (
+    kube_node_info and on(node) kube_node_labels
+  )[30m:1d]
+)
