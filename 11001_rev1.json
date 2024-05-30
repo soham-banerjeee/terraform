@@ -44,3 +44,6 @@ sum by (label_agentpool) (
   )
 )
 
+sum by (label_agentpool) (
+  count(kube_node_info) by (node) and on(node) kube_node_labels{label_agentpool=~".+"}
+)
