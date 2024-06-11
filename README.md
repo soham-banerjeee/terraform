@@ -1,7 +1,7 @@
 
 # Ansible Playbook Execution Guide
 
-This guide provides detailed instructions on how to run an Ansible playbook against an inventory, limit the run to a particular server, and execute the playbook with extra variables.
+This guide provides detailed instructions on how to run an Ansible playbook against an inventory, limit the run to a particular server, run against a specific group, and execute the playbook with extra variables.
 
 ## Prerequisites
 
@@ -105,7 +105,19 @@ ansible-playbook -i inventory.ini site.yml
 
 This command will run the `site.yml` playbook against all the hosts defined in the `inventory.ini` file under the `webapps` group.
 
-### 2. Limit the Run Against a Particular/Single Server
+### 2. Run Against a Specific Group
+
+To run the playbook against a specific group in the inventory, use the `-l` (or `--limit`) option followed by the group name:
+
+```sh
+ansible-playbook -i inventory.ini site.yml -l bastion
+```
+
+#### Explanation:
+
+- `-l bastion`: This option limits the execution of the playbook to the `bastion` group specified in the inventory file.
+
+### 3. Limit the Run Against a Particular/Single Server
 
 To limit the execution of the playbook to a particular server, use the `--limit` option:
 
@@ -117,9 +129,7 @@ ansible-playbook -i inventory.ini site.yml --limit prod-bastion-01
 
 - `--limit prod-bastion-01`: This option limits the execution of the playbook to the `prod-bastion-01` server specified in the inventory file.
 
-This command runs the `site.yml` playbook only against the `prod-bastion-01` server defined in the `inventory.ini` file.
-
-### 3. Run the Playbook with Extra Variables
+### 4. Run the Playbook with Extra Variables
 
 To pass extra variables to the playbook at runtime, use the `--extra-vars` (or `-e`) option:
 
@@ -158,6 +168,11 @@ ansible-playbook -i inventory.ini site.yml --limit prod-bastion-01 -e "http_port
   ansible-playbook -i inventory.ini site.yml
   ```
 
+- **Run against a specific group**:
+  ```sh
+  ansible-playbook -i inventory.ini site.yml -l <groupname>
+  ```
+
 - **Limit to a particular server**:
   ```sh
   ansible-playbook -i inventory.ini site.yml --limit <hostname>
@@ -168,5 +183,5 @@ ansible-playbook -i inventory.ini site.yml --limit prod-bastion-01 -e "http_port
   ansible-playbook -i inventory.ini site.yml -e "var1=value1 var2=value2"
   ```
 
-These steps should help you manage running your Ansible playbooks against various inventories and configurations effectively.
+These steps should help to manage running the Ansible playbooks against various inventories and configurations effectively.
 ```
