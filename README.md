@@ -1,4 +1,3 @@
-Sure, here's the complete `README.md` file that includes all the steps in one place:
 
 ```markdown
 # Ansible Playbook Execution Guide
@@ -137,5 +136,3 @@ This command runs the `site.yml` playbook against the `prod-bastion-01` server, 
 
 These steps should help you manage running your Ansible playbooks against various inventories and configurations effectively.
 ```
-
-Save this content as `README.md` in your project directory. This document provides clear, step-by-step instructions on
