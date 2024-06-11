@@ -13,6 +13,7 @@ This guide provides instructions on how to run an Ansible playbook against an in
 Alternatively, using pip:
    ```sh
    pip install ansible
+   ```
 
 
 2. **Inventory File**: Ensure you have an inventory file. The inventory file can be in INI or YAML format. Here's an example of an INI format inventory file (inventory.ini):
