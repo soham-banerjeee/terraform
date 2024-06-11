@@ -1,5 +1,4 @@
 
-```markdown
 # Ansible Playbook Execution Guide
 
 This guide provides detailed instructions on how to run an Ansible playbook against an inventory, limit the run to a particular server, and execute the playbook with extra variables.
