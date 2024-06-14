@@ -1,67 +1,7 @@
-rate(container_cpu_cfs_throttled_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m]) / rate(container_cpu_cfs_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m])
-
-rate(container_cpu_cfs_throttled_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m])
-
-rate(container_cpu_cfs_periods_total{pod="metrics-server-5cd44496f4-k9z6l"}[5m])
-
- Ratio of throttled CPU periods to total CPU periods over a 5m time 
-
-Throttled CPU Periods over a 5m time 
-
-Total CPU Periods over a 5m time 
-
-count_over_time(
-  sum by (label_agentpool) (
-    kube_node_info and on(node) kube_node_labels
-  )[30m:1d]
-)
-
-
-label_replace(kube_node_labels, "label_agentpool", "$1", "label_", "(.*)")
-
-count(kube_node_info and on(node) kube_node_labels)
-
-sum by (label_agentpool) (kube_node_info and on(node) kube_node_labels)
-
-sum by (label_agentpool) (
-  count_over_time(
-    kube_node_info and on(node) kube_node_labels[5m:1h]
-  )
-)
-
-
-
-sum by (label_agentpool) (
-  kube_node_info and on(node) kube_node_labels
-)
-
-
-
-
-sum by (label_agentpool) (
-  count_over_time(
-    kube_node_info and on(node) kube_node_labels[5m:1d]
-  )
-)
-
-sum by (label_agentpool) (
-  count(kube_node_info) by (node) and on(node) kube_node_labels{label_agentpool=~".+"}
-)
-
-
-
-
-sum by (label_agentpool) (
-  kube_node_info and on(node) kube_node_labels{label_agentpool=~".+"}
-)
-
-
-
-sum by (label_agentpool) (
-  count_over_time(kube_node_labels{label_agentpool=~".+"}[30m])
-)
-
-
-count by (label_agentpool) (
-  kube_node_labels{label_agentpool=~".+"}
+100 * (
+  1 - (
+    node_memory_MemFree_bytes{job="node-exporter", instance=~"$instance_ip"} 
+    + node_memory_Buffers_bytes{job="node-exporter", instance=~"$instance_ip"} 
+    + node_memory_Cached_bytes{job="node-exporter", instance=~"$instance_ip"}
+  ) / node_memory_MemTotal_bytes{job="node-exporter", instance=~"$instance_ip"}
 )
