@@ -1,7 +1,7 @@
 100 * (
   1 - (
-    node_memory_MemFree_bytes{job="node-exporter", instance=~"$instance_ip"} 
-    + node_memory_Buffers_bytes{job="node-exporter", instance=~"$instance_ip"} 
-    + node_memory_Cached_bytes{job="node-exporter", instance=~"$instance_ip"}
-  ) / node_memory_MemTotal_bytes{job="node-exporter", instance=~"$instance_ip"}
+    node_memory_MemFree_bytes{job="node-exporter", instance=~"$instance"} 
+    + node_memory_Buffers_bytes{job="node-exporter", instance=~"$instance"} 
+    + node_memory_Cached_bytes{job="node-exporter", instance=~"$instance"}
+  ) / node_memory_MemTotal_bytes{job="node-exporter", instance=~"$instance"}
 )
