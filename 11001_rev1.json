@@ -10,3 +10,12 @@
 
 
 sum(kube_node_info{node=~".*$nodepool.*", cluster="$cluster"})
+
+
+100 * (
+  1 - (
+    sum(node_memory_MemFree_bytes{hostname=~".*$nodepool.*", cluster="$cluster"}) 
+    + sum(node_memory_Buffers_bytes{hostname=~".*$nodepool.*", cluster="$cluster"}) 
+    + sum(node_memory_Cached_bytes{hostname=~".*$nodepool.*", cluster="$cluster"})
+  ) / sum(node_memory_MemTotal_bytes{hostname=~".*$nodepool.*", cluster="$cluster"})
+)
