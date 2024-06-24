@@ -1,3 +1,13 @@
+1. This panel displays the trend of the nodes count on the seleted Node Pool. It also displays the current nodes count in the left panel
+2. This panel displays the trend of the pods count on the seleted Node Pool. It also displays the current pods count in the left panel
+3. This panel displays the trend of the memory utilisation in % on the seleted Node Pool. It also displays the current memory utilisation in % in the left panel
+4. This panel displays the trend of the CPU Idle % on the seleted Node Pool. It also displays the current CPU Idle in % in the left panel
+3. This panel displays the trend of the CPU utilisation in % on the seleted Node Pool. It also displays the current CPU utilisation in % in the left panel
+
+
+
+
+
 100 * (
   1 - (
     node_memory_MemFree_bytes{job="node-exporter", instance=~"$instance_ip"} 
