@@ -5,3 +5,8 @@
     + node_memory_Cached_bytes{job="node-exporter", instance=~"$instance"}
   ) / node_memory_MemTotal_bytes{job="node-exporter", instance=~"$instance"}
 )
+
+
+
+
+rate(fluentd_output_status_emit_count{pod=~"$fluentd",plugin_id=~"$fluentdplugin"}[5m])
